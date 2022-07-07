@@ -12,16 +12,19 @@ import pickle5 as pickle
 import sys
 
 start_time = time.time()
-unknown_photo = './unknown_faces/familypic2.jpg'
-unknown_photo = './unknown_faces/steve-b-skateboard.jpg'
-unknown_photo = './unknown_faces/rose1.jpg'
-unknown_photo = './unknown_faces/bradpitt-with-glasses.jpg'
-unknown_photo = './unknown_faces/erin-play.jpg'
-unknown_photo = './unknown_faces/leslie-kitt.jpg'
-unknown_photo = './unknown_faces/gallery1.jpg'
+# unknown_photo = './unknown_faces/familypic2.jpg'
+# unknown_photo = './unknown_faces/steve-b-skateboard.jpg'
+# unknown_photo = './unknown_faces/rose1.jpg'
+# unknown_photo = './unknown_faces/bradpitt-with-glasses.jpg'
+# unknown_photo = './unknown_faces/erin-play.jpg'
+# unknown_photo = './unknown_faces/leslie-kitt.jpg'
+# unknown_photo = './unknown_faces/gallery1.jpg'
 # unknown_photo = './unknown_faces/erin-nathan.jpg'
 # unknown_photo = './unknown_faces/erin1.jpg'
 # unknown_photo = './unknown_faces/justice-league.jpg'
+# unknown_photo = './unknown_faces/erin-baby.png'
+# unknown_photo = './unknown_faces/familypic2.jpg'
+unknown_photo = './unknown_faces/gallery1.jpg'
 
 # Load Face Training Data (Face-Training-Data.pkl)
 face_encodings = {}     # Dictionary Object  'face_label' : 99999
@@ -56,12 +59,12 @@ for face_location in face_locations_unknown_image:
         match = face_recognition.compare_faces(unknown_face_encoding, [face_encodings.get(face_encoding)])
         if match[0]:
             face_label = face_encoding  # the current dictionary key is the matching person's name
-            break  # exit this loop since we already found a match
+            break  # move to next face, since we already found a match in encoding
         else:
             face_label = "Unknown"
     cv2.rectangle(unknown_image,(left,top), (right, bottom), (0,255,0), 2)
     cv2.rectangle(unknown_image, (left, top), (right,top-50), (0,255,0), -1)
-    cv2.putText(unknown_image, face_label, (left+10,top-10), cv2.FONT_HERSHEY_SIMPLEX, 1.20, (0,0,0), 3)
+    cv2.putText(unknown_image, face_label, (left+10,top-10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0,0,0), 3)
     # after we go through all the known face encodings for this particular face, process the next face...
 
 end_time = time.time()
